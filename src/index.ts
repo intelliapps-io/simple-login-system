@@ -42,6 +42,11 @@ const main = async () => {
   app.listen(httpPort, () => console.log(`
     - GraphQL Playground: http://localhost:${httpPort}/graphql
     - pgAdmin: http://localhost:5050
+      email: admin@local.host
+      password: postgres
+    - postgres: 
+      username: postgres
+      password: postgres
   `));
 }
 
