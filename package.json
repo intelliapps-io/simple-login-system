@@ -3,7 +3,7 @@
   "scripts": {
     "start": "bash ./dev.sh",
     "stop": "npm run stop:dev && npm run stop:pg",
-    "stop:pg": "npm stop && cd server",
+    "stop:pg": "cd server && npm stop",
     "stop:dev": "tmux kill-session -t dev"
   }
 }

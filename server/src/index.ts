@@ -11,7 +11,15 @@ import { authMiddleware, authChecker } from "./helpers/auth";
 
 const main = async () => {
   const httpPort = 3001;
-  await createConnection();
+
+  // Connect to Postgres DB
+  const connect = () => new Promise((resolve, reject) => {
+    let attempts = 0, maxAttempts = 10;
+    const interval = setInterval(() => createConnection()
+      .then(() => { clearInterval(interval); resolve(); })
+      .catch(error => attempts > maxAttempts ? reject(error) : attempts++), 500);
+  });
+  await connect();
 
   const schema = await buildSchema({
     resolvers,
