@@ -1,7 +1,7 @@
 import { sign } from "jsonwebtoken";
 import { Response } from "express";
 import { User, UserRole } from "../entity/User";
-import { Req, MyContext } from "../types/context";
+import { Req, MyContext } from "../ts/context";
 import { verify } from "jsonwebtoken";
 import { AuthChecker } from "type-graphql";
 

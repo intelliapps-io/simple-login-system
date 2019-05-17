@@ -10,14 +10,14 @@ import { resolvers } from "./modules/resolvers";
 import { authMiddleware, authChecker } from "./helpers/auth";
 
 const main = async () => {
-  const httpPort = 80;
+  const httpPort = 3001;
   await createConnection();
 
   const schema = await buildSchema({
     resolvers,
     authChecker,
     emitSchemaFile: {
-      path: "./generated/schema.graphql"
+      path: "../common/schema.graphql"
     }
   });
 
@@ -40,13 +40,15 @@ const main = async () => {
   apolloServer.applyMiddleware({ app });
 
   app.listen(httpPort, () => console.log(`
-    - GraphQL Playground: http://localhost:${httpPort}/graphql
-    - pgAdmin: http://localhost:5050
-      email: admin@local.host
-      password: postgres
-    - postgres: 
-      username: postgres
-      password: postgres
+  > GraphQL: http://localhost:${httpPort}/graphql
+  
+  > pgAdmin: http://localhost:5050
+       - email: admin@local.host
+       - password: postgres
+
+  >  postgres: 
+       - username: postgres
+       - password: postgres
   `));
 }
 

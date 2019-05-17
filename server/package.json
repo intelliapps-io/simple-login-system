@@ -1,0 +1,48 @@
+{
+  "name": "simple-login-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "pg": "docker-compose up",
+    "dev": "ts-node-dev src/index.ts",
+    "stop": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intelliapps-io/simple-login-system.git"
+  },
+  "author": "Jared.Moore@intelliapps.io",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/intelliapps-io/simple-login-system/issues"
+  },
+  "homepage": "https://github.com/intelliapps-io/simple-login-system#readme",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.1",
+    "@types/express-session": "^1.15.12",
+    "@types/graphql": "^14.2.0",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/pg": "^7.4.14",
+    "apollo-server-express": "^2.4.8",
+    "bcryptjs": "^2.4.3",
+    "class-validator": "^0.9.1",
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "gql": "^1.1.2",
+    "graphql": "^14.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.10.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.1.0",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "type-graphql": "^0.17.2",
+    "typeorm": "^0.2.16",
+    "typescript": "^3.4.5",
+    "winston": "^3.2.1"
+  }
+}
