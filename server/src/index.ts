@@ -21,6 +21,7 @@ const main = async () => {
   });
   await connect();
 
+  // Generate TypeGraphQL Schema 
   const schema = await buildSchema({
     resolvers,
     authChecker,
@@ -29,22 +30,28 @@ const main = async () => {
     }
   });
 
+  // Create GraphQL Server
   const apolloServer = new ApolloServer({
     schema,
     context: ({ req, res }) => ({ req, res })
   });
 
+  // Create Express Web Server
   const app = Express();
 
+  // Read authentication cookies from requests
   app.use(cookieParser())
 
+  // Limit the origin of requests
   app.use(cors({
     credentials: true,
     origin: ["http://localhost:3000"]
   }))
 
+  // Configure JWT-Authentication
   app.use(authMiddleware);
 
+  // Integrate GraphQL Server with Express
   apolloServer.applyMiddleware({ app });
 
   app.listen(httpPort, () => console.log(`
