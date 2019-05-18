@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID, Root, registerEnumType } from 'type-graphql';
+import { ObjectType, Field, ID, Root, registerEnumType, Arg } from 'type-graphql';
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
 export enum UserRole {
@@ -21,6 +21,11 @@ export class User extends BaseEntity {
   @Field()
   @Column()
   lastName: string
+
+  @Field()
+  name(@Root() parent: User): string {
+    return `${parent.firstName} ${parent.lastName}`;
+  }
 
   @Field()
   @Column({ unique: true })

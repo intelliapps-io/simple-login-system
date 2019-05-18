@@ -1,0 +1,36 @@
+fragment UserFields on User {
+  id
+  firstName
+  lastName
+  name
+  email
+  role
+}
+
+mutation Register($data: RegisterInput!) {
+	register(data: $data) {
+    ...UserFields
+  }
+}
+
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    ...UserFields
+  }
+}
+
+mutation Logout {
+  logout
+}
+
+query Me {
+  me {
+    ...UserFields
+  }
+}
+
+query Users {
+  users {
+    ...UserFields
+  }
+}

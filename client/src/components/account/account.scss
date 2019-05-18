@@ -1,0 +1,20 @@
+@import "../../scss/breakpoints.scss";
+
+.login {
+  @include centerer;
+  width: 500px;
+  height: 250px;
+}
+
+.signup {
+  @include centerer;
+  width: 500px;
+  height: 350px;
+}
+
+.form-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}

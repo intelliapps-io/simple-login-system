@@ -2,6 +2,8 @@
   "name": "main",
   "scripts": {
     "start": "bash ./dev.sh",
+    "gen": "cd server && npm run gen",
+    "attach": "tmux attach -t dev",
     "stop": "npm run stop:dev && npm run stop:pg",
     "stop:pg": "cd server && npm stop",
     "stop:dev": "tmux kill-session -t dev"

@@ -1,0 +1,32 @@
+@import "./breakpoints.scss";
+
+.xs-up-hide { display: none; }
+.sm-up-hide { display: none; }
+
+@include media-breakpoint-down(xl) {.xl-down-hide { display: none; }}
+@include media-breakpoint-down(lg) {.lg-down-hide { display: none; }}
+@include media-breakpoint-down(md) {.md-down-hide { display: none; }}
+@include media-breakpoint-down(sm) {.sm-down-hide { display: none; } .sm-up-hide { display: initial; }}
+@include media-breakpoint-down(xs) {.xs-down-hide { display: none; } .xs-up-hide { display: initial; }}
+
+$app-content-height: calc(100vh - 150px);
+$container-border-radius: 5px;
+
+@mixin center-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center
+} 
+
+@mixin scrollbar {
+  ::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar {
+    width: 4px;
+    background-color: #F5F5F5;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}

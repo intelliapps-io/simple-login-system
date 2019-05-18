@@ -1,13 +1,14 @@
 import "reflect-metadata";
 import Express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 
 import { resolvers } from "./modules/resolvers";
 import { authMiddleware, authChecker } from "./helpers/auth";
+import { runCodegen } from "./helpers/helpers";
 
 const main = async () => {
   const httpPort = 3001;
@@ -26,10 +27,10 @@ const main = async () => {
     resolvers,
     authChecker,
     emitSchemaFile: {
-      path: "../common/schema.graphql"
+      path: "./src/graphql/generated-schema.graphql"
     }
   });
-
+  
   // Create GraphQL Server
   const apolloServer = new ApolloServer({
     schema,
@@ -42,17 +43,18 @@ const main = async () => {
   // Read authentication cookies from requests
   app.use(cookieParser())
 
-  // Limit the origin of requests
-  app.use(cors({
+  // CORS
+  var corsOptions: CorsOptions = {
     credentials: true,
-    origin: ["http://localhost:3000"]
-  }))
+    origin: true
+  }
+  app.use(cors(corsOptions));
 
   // Configure JWT-Authentication
   app.use(authMiddleware);
 
   // Integrate GraphQL Server with Express
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: corsOptions });
 
   app.listen(httpPort, () => console.log(`
   > GraphQL: http://localhost:${httpPort}/graphql
@@ -61,10 +63,13 @@ const main = async () => {
        - email: admin@local.host
        - password: postgres
 
-  >  postgres: 
+  > postgres: 
        - username: postgres
        - password: postgres
   `));
+
+  // Generate Client Code
+  await runCodegen().catch(err => { });
 }
 
 main(); 

@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { withMe, MeProps } from './codegen';
+import Navbar from './components/navbar/Navbar';
+
+class App extends React.Component<MeProps & RouteComponentProps> {
+
+  render() {
+    const loading = this.props.data && this.props.data.loading;
+    const user = this.props.data && this.props.data.me ? this.props.data.me : null;
+    if (loading) return null;
+    if (!user && !loading) return <Redirect to="/login" />
+    return (
+      <div className="app">
+        <Navbar />
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withMe()(withRouter(App));
