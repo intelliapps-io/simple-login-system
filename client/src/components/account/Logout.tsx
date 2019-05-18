@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withLogout, LogoutProps, MeDocument } from "../../codegen";
+import { withLogout, LogoutProps, MeDocument } from "../../lib/codegen";
 import { Button } from "antd";
 
 class Logout extends React.Component<LogoutProps> {

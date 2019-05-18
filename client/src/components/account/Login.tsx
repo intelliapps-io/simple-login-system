@@ -2,10 +2,10 @@ import * as React from "react";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
 import "./account.scss";
-import { Button, Input, Form, Icon } from "antd";
+import { Button, Input, Form, Icon, Card } from "antd";
 import { FormComponentProps } from "antd/lib/form";
-import { withLogin, LoginProps, MeDocument } from "../../codegen";
-import { allowFormSubmit } from "../../helpers/helpers";
+import { withLogin, LoginProps, MeDocument } from "../../lib/codegen";
+import { allowFormSubmit } from "../../lib/helpers/helpers";
 
 interface IState {
   error: string | null
@@ -34,9 +34,9 @@ class Login extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { getFieldDecorator, getFieldsError } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="login">
+      <Card className="login">
         <h2>Login</h2>
         <Form onSubmit={(event) => this.onSubmit(event)}>
           <Form.Item>
@@ -65,7 +65,7 @@ class Login extends React.Component<IProps, IState> {
             <Link to="/signup" style={{ float: "right" }}>No account? Signup Here</Link>
           </div>
         </Form>
-      </div>
+      </Card>
     );
   };
 }

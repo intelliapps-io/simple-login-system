@@ -1,15 +1,21 @@
-@import "../../scss/breakpoints.scss";
+@import "../../lib/scss/breakpoints.scss";
 
 .login {
   @include centerer;
+  h2 {
+    margin-bottom: 20px;
+  }
+  box-shadow: 0px 2px 10px -2px #d4d4d4;
   width: 500px;
-  height: 250px;
 }
 
 .signup {
   @include centerer;
+  h2 {
+    margin-bottom: 20px;
+  }
+  box-shadow: 0px 2px 10px -2px #d4d4d4;
   width: 500px;
-  height: 350px;
 }
 
 .form-footer {

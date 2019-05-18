@@ -9,7 +9,7 @@
     "pg": "docker-compose up",
     "stop": "docker-compose down",
     "gen": "npx graphql-codegen --config codegen.yml && npm run postGen",
-    "postGen": "npx ts-node ./src/helpers/modifyGenerated.ts && mv ./src/graphql/codegen.tsx ../client/src"
+    "postGen": "npx ts-node ./src/helpers/modifyGenerated.ts && mv ./src/graphql/codegen.tsx ../client/src/lib"
   },
   "repository": {
     "type": "git",

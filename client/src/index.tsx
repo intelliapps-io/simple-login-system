@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './lib/helpers/serviceWorker';
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import "antd/dist/antd.css";
-import './scss/index.scss';
-import App from './App';
-import Login from "./components/account/Login";
-import Signup from "./components/account/Signup";
+import './lib/scss/index.scss';
+import AppLayout from './AppLayout';
 
 const client = new ApolloClient({
   uri: "http://localhost:3001/graphql",
@@ -23,11 +21,7 @@ const client = new ApolloClient({
 const WithApollo = () => (
   <ApolloProvider client={client}>
     <HashRouter>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route path="/" component={App} />
-      </Switch>
+      <AppLayout />
     </HashRouter>
   </ApolloProvider>
 )

@@ -1,11 +1,10 @@
 import * as React from "react";
 import "./account.scss";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
-import { Button, Input, Form, Icon, Row, Col } from "antd";
+import { Button, Input, Form, Icon, Row, Col, Card } from "antd";
 import { FormComponentProps } from "antd/lib/form";
-import { withRegister, RegisterProps, MeDocument } from "../../codegen";
-import { allowFormSubmit } from "../../helpers/helpers";
-import { ApolloError } from "apollo-boost";
+import { withRegister, RegisterProps, MeDocument } from "../../lib/codegen";
+import { allowFormSubmit } from "../../lib/helpers/helpers";
 
 type IProps = FormComponentProps & RegisterProps & RouteComponentProps;
 
@@ -23,7 +22,7 @@ class Signup extends React.Component<IProps> {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="signup">
+      <Card className="signup">
         <h2>Create An Account</h2>
         <Form onSubmit={(event) => this.onSubmit(event)}>
           <Row>
@@ -74,7 +73,7 @@ class Signup extends React.Component<IProps> {
             <Link to="/login" style={{ float: "right" }}>Have an account? Login Here</Link>
           </div>
         </Form>
-      </div>
+      </Card>
     );
   };
 }
