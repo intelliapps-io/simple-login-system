@@ -5,18 +5,30 @@ import { Button, Input, Form, Icon, Row, Col, Card } from "antd";
 import { FormComponentProps } from "antd/lib/form";
 import { withRegister, RegisterProps, MeDocument } from "../../lib/codegen";
 import { allowFormSubmit } from "../../lib/helpers/helpers";
+import { parseApolloErrors } from "../../lib/helpers/parseApolloErrors";
+
+interface IState {
+  errors: string[]
+}
 
 type IProps = FormComponentProps & RegisterProps & RouteComponentProps;
 
-class Signup extends React.Component<IProps> {
+class Signup extends React.Component<IProps, IState> {
   fieldNames = ['firstName', 'lastName', 'email', 'password']
+
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      errors: []
+    }
+  }
 
   onSubmit(event: React.FormEvent) {
     event.preventDefault();
     const { firstName, lastName, email, password } = this.props.form.getFieldsValue(this.fieldNames);
-    this.props.mutate!({
-      variables: { data: { firstName, lastName, email, password } },
-    }).then(() => { this.props.history.push("/login") }).catch((error) => console.log(error.extensions.exception.validationErrors));
+    this.props.mutate!({ variables: { data: { firstName, lastName, email, password } } })
+      .then(() => this.props.history.push("/login"))
+      .catch((error) => this.setState({ errors: parseApolloErrors(error) }));
   }
 
   render() {
@@ -68,6 +80,7 @@ class Signup extends React.Component<IProps> {
               />
             )}
           </Form.Item>
+          <div className="form-error">{this.state.errors.map((error, i) => <div className="error" key={i}>{error}</div>)}</div>
           <div className="form-footer">
             <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(this.fieldNames, this.props.form)}>Signup</Button>
             <Link to="/login" style={{ float: "right" }}>Have an account? Login Here</Link>

@@ -30,7 +30,7 @@ class Login extends React.Component<IProps, IState> {
       variables: { email, password },
       refetchQueries: [{ query: MeDocument }],
       awaitRefetchQueries: true
-    }).then(() => { this.props.history.push("/") }).catch(() => this.setState({ error: "email or password is incorrect." }));
+    }).then(() => { this.props.history.push("/") }).catch(() => this.setState({ error: "Email or password is incorrect" }));
   }
 
   render() {
@@ -59,7 +59,8 @@ class Login extends React.Component<IProps, IState> {
               />
             )}
           </Form.Item>
-          {this.state.error ? <div>{this.state.error}</div> : null }
+          
+          <div className="form-error">{this.state.error ? <div className="error">{this.state.error}</div> : null}</div>
           <div className="form-footer">
             <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(this.fieldNames, this.props.form)}>Login</Button>
             <Link to="/signup" style={{ float: "right" }}>No account? Signup Here</Link>
