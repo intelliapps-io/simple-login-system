@@ -39,7 +39,7 @@ class Navbar extends React.Component<IProps> {
     return (
       <div>
         <Layout.Header className="navbar">
-          <div className="logo"><span>My App</span></div>
+          <Link to="/"><div className="logo"><span>My App</span></div></Link>
           <Menu className="menu" theme="dark" mode="horizontal" selectedKeys={[this.getRouteLocation()]}>
             {user && user.id ? this.UserMenu() : this.PublicMenu()}
           </Menu>

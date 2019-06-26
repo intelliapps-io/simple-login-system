@@ -1,0 +1,19 @@
+.home-root {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .home-title {
+    background-color: rgba(0, 79, 153, 0.8);
+    color: #fff;
+    padding: 20px 40px;
+    width: fit-content;
+  }
+
+  .home-cards {
+    .ant-col {
+      padding: 20px;
+    }
+  }
+}

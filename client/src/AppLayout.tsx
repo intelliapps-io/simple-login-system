@@ -3,10 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import { Layout } from 'antd';
 
 import Navbar from './components/navbar/Navbar';
-import App from './components/App';
 import Login from "./components/account/Login";
 import Signup from "./components/account/Signup";
 import ConfirmAccount from "./components/account/ConfirmAccount";
+import { Home } from "./pages/home/Home";
 
 class AppLayout extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class AppLayout extends React.Component {
             <Route exact path="/account/confirm/:userId" component={ConfirmAccount} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route path="/" component={App} />
+            <Route path="/" component={Home} />
           </Switch>
         </Layout.Content>
       </Layout>
