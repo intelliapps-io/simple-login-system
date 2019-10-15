@@ -30,7 +30,7 @@ class Login extends React.Component<IProps, IState> {
       variables: { email, password },
       refetchQueries: [{ query: MeDocument }],
       awaitRefetchQueries: true
-    }).then(() => { this.props.history.push("/") }).catch(() => this.setState({ error: "Email or password is incorrect" }));
+    }).then(() => { this.props.history.push("/account") }).catch(() => this.setState({ error: "Email or password is incorrect" }));
   }
 
   render() {

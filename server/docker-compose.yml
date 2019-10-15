@@ -1,40 +1,74 @@
+#############################################################################
+################################ PostgreSQL #################################
+
+# version: '3.5'
+
+# services:
+#   postgres:
+#     container_name: postgres
+#     image: postgres
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: postgres
+#       PGDATA: /data/postgres
+#     volumes:
+#        - postgres:/data/postgres
+#     ports:
+#       - "5432:5432"
+#     networks:
+#       - postgres
+#     restart: unless-stopped
+  
+#   pgadmin:
+#     container_name: pgadmin
+#     image: dpage/pgadmin4
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: admin@local.host
+#       PGADMIN_DEFAULT_PASSWORD: postgres
+#     volumes:
+#        - pgadmin:/root/.pgadmin
+#     ports:
+#       - "5050:80"
+#     networks:
+#       - postgres
+#     restart: unless-stopped
+
+# networks:
+#   postgres:
+#     driver: bridge
+
+# volumes:
+#     postgres:
+#     pgadmin:
+
+#########################################################################
+################################ MYSQL ##################################
+
 version: '3.5'
 
 services:
-  postgres:
-    container_name: postgres
-    image: postgres
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.17
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      PGDATA: /data/postgres
-    volumes:
-       - postgres:/data/postgres
+      MYSQL_USER: 'user'
+      MYSQL_DATABASE: 'db'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
     ports:
-      - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
-  
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@local.host
-      PGADMIN_DEFAULT_PASSWORD: postgres
+      - '3306:3306'
+    expose:
+      - '3306'
     volumes:
-       - pgadmin:/root/.pgadmin
-    ports:
-      - "5050:80"
+      - mysql:/var/lib/mysql
     networks:
-      - postgres
+      - mysql
     restart: unless-stopped
 
 networks:
-  postgres:
+  mysql:
     driver: bridge
 
 volumes:
-    postgres:
-    pgadmin:
+  mysql:

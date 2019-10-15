@@ -21,7 +21,7 @@ const main = async () => {
       .then(() => { clearInterval(interval); resolve(); })
       .catch(error => attempts > maxAttempts ? reject(error) : attempts++), 500);
   });
-  await connect();
+  await connect().catch(err => { throw err });
 
   // Generate TypeGraphQL Schema 
   const schema = await buildSchema({
@@ -73,4 +73,5 @@ const main = async () => {
   await runCodegen().catch(err => { });
 }
 
-main(); 
+main()
+  .catch(err => { throw err });  

@@ -1,7 +1,7 @@
 # simple-login-system
 
 ## Technologies Used
-- Docker: postgres / pgAdmin4
+- Docker: (postgres / pgAdmin4) or (mysql)
 - TypeORM
 - TypeGraphQL / Apollo-Server
 - Express
