@@ -1,6 +1,5 @@
 #############################################################################
 ################################ PostgreSQL #################################
-
 # version: '3.5'
 
 # services:
@@ -50,21 +49,38 @@ version: '3.5'
 services:
   mysql:
     container_name: mysql
-    image: mysql:8.0.17
+    image: mysql:5.7.27
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_USER: 'user'
-      MYSQL_DATABASE: 'db'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db
     ports:
-      - '3306:3306'
+      - 3306:3306
     expose:
-      - '3306'
+      - 3306
     volumes:
       - mysql:/var/lib/mysql
     networks:
       - mysql
-    restart: unless-stopped
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: user
+      PMA_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password 
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    networks:
+      - mysql
+    restart: always
 
 networks:
   mysql:
