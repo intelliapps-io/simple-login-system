@@ -2,10 +2,10 @@
 # simple-login-system
 
 ## Technologies Used
-
+💗 **TypeScript** *(of course)* 💗
 |Server Side| Client Side | Docker |
 |--|--|--|
-|- TypeScript <br> - Express <br> - TypeORM <br> - TypeGraphQL <br> - Apollo Server <br> | - TypeScript <br> - React <br> - Apollo Client <br> - Antd (UI Library) <br> - GraphQL Generator| - Configured to Support: <br> - MySQL / PhpMyAdmin <br> - PostgreSQL / PGAdmin
+| - Express <br> - TypeORM <br> - TypeGraphQL <br> - Apollo Server <br> | - React <br> - Apollo Client <br> - Antd (UI Library) <br> - GraphQL Generator| - Configured to Support: <br> - MySQL / PhpMyAdmin <br> - PostgreSQL / PGAdmin
 
 ## Get Started
  1. Install Packages 
