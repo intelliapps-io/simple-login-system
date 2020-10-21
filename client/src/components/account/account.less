@@ -1,0 +1,30 @@
+@import '../../lib/less/index.less';
+
+.login {
+  h2 {
+    margin-bottom: 20px;
+  }
+  box-shadow: 0px 2px 10px -2px #d4d4d4;
+  width: 500px;
+  margin: auto;
+
+  @media @for-sm {
+    width: 100%;
+  }
+}
+
+.signup {
+  .login
+}
+
+.form-error {
+  margin-bottom: 24px;
+  color: crimson;
+}
+
+.form-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}

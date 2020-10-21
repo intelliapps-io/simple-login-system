@@ -1,76 +1,72 @@
-import * as React from "react";
-import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-
-import "./account.scss";
-import { Button, Input, Form, Icon, Card } from "antd";
-import { FormComponentProps } from "antd/lib/form";
-import { withLogin, LoginProps, MeDocument } from "../../lib/codegen";
+import { Button, Card, Form, Input } from "antd";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import { useForm } from "antd/lib/form/Form";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { MeDocument, useLoginMutation } from "../../lib/codegen";
+import { AppContext } from "../../lib/helpers/AppContext";
 import { allowFormSubmit } from "../../lib/helpers/helpers";
+import "./account.less";
 
-interface IState {
-  error: string | null
+interface LoginProps {
+
 }
 
-type IProps = FormComponentProps & LoginProps & RouteComponentProps;
+export const Login: React.FC<LoginProps> = props => {
+  // hooks
+  const [form] = useForm()
+  const [loginMutation] = useLoginMutation()
+  const { router } = useContext(AppContext)
 
-class Login extends React.Component<IProps, IState> {
-  fieldNames = ["email", "password"]
+  // state
+  const [errors, setErrors] = useState<String[]>([])
 
-  constructor(props: IProps) {
-    super(props);
-    this.state = {
-      error: null
-    }
-  }
+  // consts
+  const fieldNames = ["email", "password"]
 
-  onSubmit(event: React.FormEvent) {
+  const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const { email, password } = this.props.form.getFieldsValue(this.fieldNames) as { email: string, password: string };
-    this.props.mutate!({
+    const { email, password } = form.getFieldsValue(fieldNames) as { email: string, password: string };
+    loginMutation({
       variables: { email, password },
       refetchQueries: [{ query: MeDocument }],
       awaitRefetchQueries: true
-    }).then(() => { this.props.history.push("/account") }).catch(() => this.setState({ error: "Email or password is incorrect" }));
+    }).then(() => { router.history.push("/account") }).catch(() => setErrors(["Email or password is incorrect"]));
   }
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Card className="login">
-        <h2>Login</h2>
-        <Form onSubmit={(event) => this.onSubmit(event)}>
-          <Form.Item>
-            {getFieldDecorator('email', { rules: [{ required: true, message: 'Email is required!' }] })(
-              <Input
-                prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="email"
-                placeholder="Email"
-                className="input"
-              />
-            )}
-          </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('password', { rules: [{ required: true, message: 'Password is required!' }] })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
-                className="input"
-              />
-            )}
-          </Form.Item>
-          
-          <div className="form-error">{this.state.error ? <div className="error">{this.state.error}</div> : null}</div>
-          <div className="form-footer">
-            <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(this.fieldNames, this.props.form)}>Login</Button>
-            <Link to="/signup" style={{ float: "right" }}>No account? Signup Here</Link>
-          </div>
-        </Form>
-      </Card>
-    );
-  };
-}
+  return (
+    <Card className="login">
+      <h2>Login</h2>
+      <Form form={form} onFinish={(event) => onSubmit(event)}>
+        <Form.Item
+          name='email'
+          rules={[{ required: true, message: 'Email is required!' }]}
+        >
+            <Input
+              prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="email"
+              placeholder="Email"
+              className="input"
+            />
+        </Form.Item>
+        <Form.Item
+          name='password'
+          rules={[{ required: true, message: 'Password is required!' }]}
+        >
+            <Input
+              prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+              className="input"
+            />
+        </Form.Item>
 
-export default Form.create({ name: 'login' })(
-  withLogin<FormComponentProps>()(withRouter(Login))
-);
+        <div className="form-error">{errors.map((error, i) => <div className="error" key={i}>{error}</div>)}</div>
+        <div className="form-footer">
+          <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(fieldNames, form)}>Login</Button>
+          <Link to="/signup" style={{ float: "right" }}>No account? Signup Here</Link>
+        </div>
+      </Form>
+    </Card>
+  );
+}

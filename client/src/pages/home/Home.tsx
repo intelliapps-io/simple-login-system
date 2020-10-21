@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.scss";
+import "./Home.less";
 import Title from "antd/lib/typography/Title";
 import { Row, Col, Card } from "antd";
 

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Limiter } from "../helpers";
 
 export enum ResponsiveSize {

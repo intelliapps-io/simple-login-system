@@ -1,7 +1,8 @@
-import "./Navbar.scss"
+import "./Navbar.less"
 import React, { useContext } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import { Menu, Icon, Layout } from "antd";
+import { Menu, Layout } from "antd";
+import { LogoutOutlined } from '@ant-design/icons'
 import { Link } from "react-router-dom";
 import { useLogoutMutation } from "../../lib/codegen";
 import { AppContext } from "../../lib/helpers/AppContext";
@@ -29,7 +30,7 @@ const _Navbar: React.FC<NavbarProps> = props => {
       <Menu.Item key="2">nav 2</Menu.Item>,
       <Menu.Item key="3">nav 3</Menu.Item>,
       <Menu.Item key="4" className="account" onClick={() => handleLogout()}>
-        <Icon type="logout" /> Logout
+        <LogoutOutlined type="logout" /> Logout
       </Menu.Item>
     ]
   }

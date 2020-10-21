@@ -1,4 +1,4 @@
-import { ApolloError } from "apollo-boost";
+import { ApolloError } from 'apollo-client';
 
 // @ts-ignore
 interface CustomError extends ApolloError {

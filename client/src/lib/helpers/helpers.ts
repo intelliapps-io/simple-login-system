@@ -1,6 +1,6 @@
-import { FormComponentProps } from "antd/lib/form";
+import { FormInstance } from "../global-types";
 
-export function allowFormSubmit(fieldNames: string[], formProps: FormComponentProps["form"]) {
+export function allowFormSubmit(fieldNames: string[], formProps: FormInstance) {
   const { getFieldError, isFieldTouched } = formProps;
   let allowSubmit = false;
   fieldNames.forEach(field => {

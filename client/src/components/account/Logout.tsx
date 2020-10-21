@@ -1,18 +1,23 @@
 import * as React from "react";
-import { withLogout, LogoutProps, MeDocument } from "../../lib/codegen";
+import { MeDocument, useLogoutMutation } from "../../lib/codegen";
 import { Button } from "antd";
+import "./account.less";
 
-class Logout extends React.Component<LogoutProps> {
-  logout() {
-    this.props.mutate!({
+interface LogoutProps {
+
+}
+
+export const Logout: React.FC<LogoutProps> = props => {
+  const [logoutMutation] = useLogoutMutation()
+
+  const logout = () => {
+    logoutMutation({
       refetchQueries: [{ query: MeDocument }],
       awaitRefetchQueries: true
     })
   }
 
-  render() {
-    return <Button onClick={() => this.logout()}>Logout</Button>;
-  };
+  return (
+    <Button onClick={() => logout()}>Logout</Button>
+  );
 }
-
-export default withLogout()(Logout);

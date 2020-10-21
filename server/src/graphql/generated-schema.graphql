@@ -4,35 +4,35 @@
 # -----------------------------------------------
 
 type Mutation {
-  login(password: String!, email: String!): User
+  login(email: String!, password: String!): User
   logout: String
   register(data: RegisterInput!): User!
 }
 
 type Query {
-  users: [User!]!
   me: User
+  users: [User!]!
 }
 
 input RegisterInput {
+  email: String!
   firstName: String!
   lastName: String!
-  email: String!
   password: String!
 }
 
 """User access role"""
 enum role {
-  USER
   ADMIN
+  USER
 }
 
 type User {
-  id: ID!
+  authCount: Float
+  email: String!
   firstName: String!
+  id: ID!
   lastName: String!
   name: String!
-  email: String!
   role: role!
-  authCount: Float
 }
