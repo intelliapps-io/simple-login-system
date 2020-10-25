@@ -25,7 +25,7 @@ export const Login: React.FC<LoginProps> = props => {
   const fieldNames = ["email", "password"]
 
   const onSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+    // event.preventDefault();
     const { email, password } = form.getFieldsValue(fieldNames) as { email: string, password: string };
     loginMutation({
       variables: { email, password },
@@ -63,7 +63,7 @@ export const Login: React.FC<LoginProps> = props => {
 
         <div className="form-error">{errors.map((error, i) => <div className="error" key={i}>{error}</div>)}</div>
         <div className="form-footer">
-          <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(fieldNames, form)}>Login</Button>
+          <Button className="form-submit" htmlType="submit" disabled={false}>Login</Button>
           <Link to="/signup" style={{ float: "right" }}>No account? Signup Here</Link>
         </div>
       </Form>

@@ -26,7 +26,6 @@ export const Signup: React.FC<SignupProps> = props => {
   const fieldNames = ['firstName', 'lastName', 'email', 'password']
 
   const onSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
     const { firstName, lastName, email, password } = form.getFieldsValue(fieldNames)
     registerMutation({ variables: { data: { firstName, lastName, email, password } } })
       .then(() => router.history.push("/login"))
@@ -86,7 +85,7 @@ export const Signup: React.FC<SignupProps> = props => {
         </Form.Item>
         <div className="form-error">{errors.map((error, i) => <div className="error" key={i}>{error}</div>)}</div>
         <div className="form-footer">
-          <Button className="form-submit" htmlType="submit" disabled={allowFormSubmit(fieldNames, form)}>Signup</Button>
+          <Button className="form-submit" htmlType="submit" disabled={false}>Signup</Button>
           <Link to="/login" style={{ float: "right" }}>Have an account? Login Here</Link>
         </div>
       </Form>
